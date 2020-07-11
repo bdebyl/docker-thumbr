@@ -1,7 +1,7 @@
 FROM alpine:3.12
 MAINTAINER Bastian de Byl <bastian@bdebyl.net>
 
-RUN apk -v --update add imagemagick
+RUN apk -v --update add imagemagick file
 
 RUN rm /var/cache/apk/*
 

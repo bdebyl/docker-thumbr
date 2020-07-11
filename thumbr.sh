@@ -72,25 +72,27 @@ if [ ! "$CONVERT" ]; then
     exit 1
 fi
 
-find "$BROWSE_PATH" -type f -not -path '*w_500*' -exec file {} \; | grep -o -P '^.+: \w+ image' | sed 's/\:.&$//g' | while read i; do
-    # Create the thumbnail image
-    RESIZE_IMG="$(printf "%s" "$i" | sed 's|'$BROWSE_PATH'/*||g;')"
-    THUMB_PATH="$BROWSE_PATH/w_$WIDTH"
+find "$BROWSE_PATH" -type f -not -path '*w_500*' -exec file {} \; | awk -F':' '/^.+: \w+ image/{print $1}' | while read -r i; do
+    if [ "$i" ]; then
+        # Create the thumbnail image
+        RESIZE_IMG="$(printf "%s" "$i" | sed 's|'"$BROWSE_PATH"'/*||g;')"
+        THUMB_PATH="$BROWSE_PATH/w_$WIDTH"
 
-    RESIZE_IMG_PATH="$THUMB_PATH/$(dirname $RESIZE_IMG)"
+        RESIZE_IMG_PATH="$THUMB_PATH/$(dirname "$RESIZE_IMG")"
 
-    # Create the thumbnail directory fo the image to be made
-    if [ ! -d "$RESIZE_IMG_PATH" ]; then
-        printf "! Making directory: %s\n" "$RESIZE_IMG_PATH"
-        if [ ! "$DRYRUN" ]; then
-            mkdir -p "$RESIZE_IMG_PATH"
+        # Create the thumbnail directory fo the image to be made
+        if [ ! -d "$RESIZE_IMG_PATH" ]; then
+            printf "! making directory: %s\n" "$RESIZE_IMG_PATH"
+            if [ ! "$DRYRUN" ]; then
+                mkdir -p "$RESIZE_IMG_PATH"
+            fi
         fi
-    fi
 
-    if [ ! -f "$THUMB_PATH/$RESIZE_IMG" ]; then
-        printf "└─ Converting %s to thumbnail in %s/%s \n" "$i" "$THUMB_PATH" "$RESIZE_IMG"
-        if [ ! "$DRYRUN" ]; then
-            "$CONVERT" -resize ${WIDTH}x "$i" "$THUMB_PATH/$RESIZE_IMG";
+        if [ ! -f "$THUMB_PATH/$RESIZE_IMG" ]; then
+            printf "converting %s to thumbnail in %s/%s \n" "$i" "$THUMB_PATH" "$RESIZE_IMG"
+            if [ ! "$DRYRUN" ]; then
+                "$CONVERT" -resize "${WIDTH}"x "$i" "$THUMB_PATH/$RESIZE_IMG";
+            fi
         fi
     fi
 done
