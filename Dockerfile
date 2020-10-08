@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:latest
 MAINTAINER Bastian de Byl <bastian@bdebyl.net>
 
 RUN apk -v --update add imagemagick file
