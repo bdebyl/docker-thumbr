@@ -13,3 +13,4 @@ WORKDIR /src
 VOLUME ["/src"]
 
 ENTRYPOINT ["thumbr.sh"]
+CMD ["-h"]
