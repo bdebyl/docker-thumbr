@@ -72,7 +72,7 @@ if [ ! "$CONVERT" ]; then
     exit 1
 fi
 
-find "$BROWSE_PATH" -type f -not -path "*w_$THUMBR_WIDTH*" -exec file {} \; | awk -F':' '/^.+: \w+ image/{print $1}' | while read -r i; do
+find "$BROWSE_PATH" -type f -not -path "*w_$WIDTH*" -exec file {} \; | awk -F':' '/^.+: \w+ image/{print $1}' | while read -r i; do
     if [ "$i" ]; then
         # Create the thumbnail image
         RESIZE_IMG="$(printf "%s" "$i" | sed 's|'"$BROWSE_PATH"'/*||g;')"
