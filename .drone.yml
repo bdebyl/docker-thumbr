@@ -32,11 +32,14 @@ steps:
       password:
         from_secret: docker_password
       repo: bdebyl/thumbr
+      tags:
+        - latest
+        - '0.1.$DRONE_BUILD_NUMBER'
     when:
       branch:
         - master
 ---
 kind: signature
-hmac: b5b3d5188c1e889d08f6ff760620ea43202fa7266f7b53eaa6331d72afd5aed3
+hmac: b05e72bf21a5e09bdf76a1ee32d3e2ea0f8bc759a7e696926652e12844f4af6f
 
 ...

@@ -7,6 +7,9 @@ DESCRIPTION
     Recursively searches through the passed path, ignoring existing thumbnails,
     and generates thumbnails for images greater than 600px in width.
 
+    Specify the THUMBR_WIDTH environment variable optionally instead of using
+    -w/--width option.
+
 OPTIONS
     -h, --help         Shows this help prompt
     -w, --width        Width threshold and dirname (default: 500px, 'w_500', or set THUMBR_WIDTH environment)
