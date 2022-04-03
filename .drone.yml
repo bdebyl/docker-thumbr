@@ -27,19 +27,17 @@ steps:
   - name: publish
     image: plugins/docker
     settings:
+      auto_tag: true
       username:
         from_secret: docker_username
       password:
         from_secret: docker_password
       repo: bdebyl/thumbr
-      tags:
-        - latest
-        - '0.1.$DRONE_BUILD_NUMBER'
     when:
       branch:
         - master
 ---
 kind: signature
-hmac: b05e72bf21a5e09bdf76a1ee32d3e2ea0f8bc759a7e696926652e12844f4af6f
+hmac: 581e2da8fa7a670e320ae0db03cb0e03744231b36607588b474c08747193d780
 
 ...
