@@ -8,7 +8,7 @@ steps:
     commands:
       - git fetch origin +refs/heads/master
       - git show-ref
-      - git diff --name-only HEAD~1..HEAD | grep Dockerfile || exit 78
+      - git diff --name-only HEAD~1..HEAD | grep -E 'Dockerfile|thumbr.sh' || exit 78
     when:
       branch:
         - master
@@ -37,6 +37,6 @@ steps:
         - master
 ---
 kind: signature
-hmac: fbe6e0948cc3c7a6f5aa750c596cadbb4b65bde73cf35bd4d9eae5f4af93a777
+hmac: b5b3d5188c1e889d08f6ff760620ea43202fa7266f7b53eaa6331d72afd5aed3
 
 ...
