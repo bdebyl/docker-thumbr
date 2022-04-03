@@ -9,7 +9,7 @@ DESCRIPTION
 
 OPTIONS
     -h, --help         Shows this help prompt
-    -w, --width        Width threshold and dirname (default: 500px, 'w_500')
+    -w, --width        Width threshold and dirname (default: 500px, 'w_500', or set THUMBR_WIDTH environment)
     -d, --dry-run      Dry-run that will not create actual thumbnails
 EOF
 
@@ -24,7 +24,7 @@ show_help() {
 }
 
 # Defaults
-WIDTH=500
+WIDTH=${THUMBR_WIDTH:-500}
 
 while :; do
     case $1 in
