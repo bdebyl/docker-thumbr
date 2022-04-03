@@ -18,7 +18,7 @@ steps:
     commands:
       - git fetch origin +refs/heads/master
       - git show-ref
-      - git diff --name-only $(git merge-base refs/remotes/origin/master HEAD)..HEAD | grep Dockerfile || exit 78
+      - git diff --name-only $(git merge-base refs/remotes/origin/master HEAD)..HEAD | grep -E 'Dockerfile|thumbr.sh' || exit 78
     when:
       branch:
         exclude:
@@ -37,6 +37,6 @@ steps:
         - master
 ---
 kind: signature
-hmac: 128beebbfd6fb07bfd8bd01ad7f6cecb93936068203829b366354a77ce076448
+hmac: fbe6e0948cc3c7a6f5aa750c596cadbb4b65bde73cf35bd4d9eae5f4af93a777
 
 ...
